@@ -3,9 +3,7 @@ import java.util.Scanner;
 public class CommandLineOutput implements OutputInterface {
   private Scanner scanner = new Scanner(System.in);
   
-  public CommandLineOutput() {
-    
-  }
+  public CommandLineOutput() {}
   
   @Override
   public String takeInput() {
