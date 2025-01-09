@@ -1,7 +1,5 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.List;
-import java.util.ArrayList;
 
 public class WordPattern {
   public final Pattern pattern;
@@ -48,8 +46,8 @@ public class WordPattern {
       // if escaping, push and skip the next character
       // if dollar sign with number, insert group and skip next character
 
-      if (c == "\\") { output += next; i++; }
-      else if (c == "$" && isNumeric(next)) { output += groups[intOf(next)]; i++; }
+      if (c == '\\') { output += next; i++; }
+      else if (c == '$' && isNumeric(next)) { output += groups[intOf(next)]; i++; }
       else { output += c; }
     }
 
