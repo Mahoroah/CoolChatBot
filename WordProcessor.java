@@ -3,9 +3,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
+
+
+
 public class WordProcessor {
     ArrayList<WordPattern> patterns;
 
+    /**
+     * constructs a new WordProcessor.
+     * reads "flags" from `TextFiles/flags.txt`
+     * and reads responses from `TextFiles/response.txt`.
+     * they should be paired up
+     * 
+     * @see WordPattern
+     */
     public WordProcessor() {
         File flagFile = new File("TextFiles/flags.txt");
         Scanner flagReader = new Scanner(flagFile);
