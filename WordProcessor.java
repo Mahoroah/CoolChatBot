@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +8,7 @@ import java.util.regex.*;
 
 
 public class WordProcessor {
-    ArrayList<WordPattern> patterns;
+    ArrayList<WordPattern> patterns = new ArrayList<>();
 
     /**
      * constructs a new WordProcessor.
@@ -17,14 +18,14 @@ public class WordProcessor {
      * 
      * @see WordPattern
      */
-    public WordProcessor() {
+    public WordProcessor() throws FileNotFoundException {
         File flagFile = new File("TextFiles/flags.txt");
         Scanner flagReader = new Scanner(flagFile);
-        File responseFile = new File("TextFiles/response.txt");
-        Scanner responseReader = new Scanner(responseReader);
+        File responseFile = new File("TextFiles/responses.txt");
+        Scanner responseReader = new Scanner(responseFile);
 
-        ArrayList<String> flags;
-        ArrayList<String> responses;
+        ArrayList<String> flags = new ArrayList<>();
+        ArrayList<String> responses = new ArrayList<>();
 
         // read flag reader into an array
         while (flagReader.hasNext()) {
@@ -42,7 +43,8 @@ public class WordProcessor {
             System.exit(1);
         }
 
-        for (i=0; i < flags.size(); i++) {
+        for (int i=0; i < flags.size(); i++) {
+            System.out.printf("%s => %s\n", flags.get(i), responses.get(i));
             patterns.add(new WordPattern(flags.get(i), responses.get(i)));
         }
     }

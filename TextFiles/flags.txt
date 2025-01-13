@@ -1,2 +1,2 @@
 toilet
-like $(\w+)
+like (\w+)
