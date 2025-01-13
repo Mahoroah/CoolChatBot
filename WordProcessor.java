@@ -4,10 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
 public class WordProcessor {
-    Scanner scan = new Scanner(System.in);
-    Pattern pattern;
-    Matcher matcher;
-
     ArrayList<WordPattern> patterns;
 
     public WordProcessor() {
@@ -41,39 +37,20 @@ public class WordProcessor {
     }
 
     /**
-     * This is the method for the chatbot to identify keywords that abide by regex Identifiers in the text file
-     * @return flags: List of flags to refer to in responses text file
+     * tries to get the response of the first matching pattern in the
+     * patterns list.
+     * 
+     * @param sentence the sentence to match on
+     * @return formatted response, or null if didn't match any
      */
-    @SuppressWarnings("static-access")
-    public List<Integer> processInput() {
-        String value = scan.nextLine();
-        List<Integer> flags = new ArrayList<Integer>();
-        boolean valid;
-        int counter = 0;
-    
-        pattern.compile(value, Pattern.CASE_INSENSITIVE);
-
-        try {
-        File file = new File("TextFiles/flags.txt");
-        Scanner flagReader = new Scanner(file);
-        String line; 
-        while(flagReader.hasNext()) {
-            line = flagReader.next();
-            pattern.matcher(line);
-            valid = matcher.find();
-            counter++;
-            if(valid) {
-                flags.add(counter);
+    public String tryRecognizeAll(String sentence) {
+        for (WordPattern pattern : this.patterns) {
+            String patResponse = pattern.recognize(sentence);
+            if (patResponse != null) {
+                return patResponse;
             }
         }
 
-        flagReader.close();
-
-        } catch (Exception e) {
-            System.out.println("Error: "+ e);
-        }
-
-        return flags;
+        return null;
     }
-
 }
