@@ -1,5 +1,5 @@
 \btoilet\b
-\blike\b $(\w+)
+\blike\b (\w+)
 \brizz\b
 \bhi\b
 \bhello\b
