@@ -40,7 +40,7 @@ public class WordPattern {
       char c = template.charAt(i);
       char next;
 
-      if (i + 1 < template.length()) { output += c; continue; }
+      if (i + 1 >= template.length()) { output += c; continue; }
       else { next = template.charAt(i + 1); }
 
       // if escaping, push and skip the next character
@@ -65,7 +65,7 @@ public class WordPattern {
     Matcher matcher = pattern.matcher(sentence);
     if (!matcher.find()) { return null; }
 
-    String[] groups = new String[matcher.groupCount()];
+    String[] groups = new String[matcher.groupCount() + 1];
 
     for (int i=0; i < groups.length; i++) {
       groups[i] = matcher.group(i);

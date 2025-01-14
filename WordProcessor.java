@@ -1,23 +1,31 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
+
+
+
 public class WordProcessor {
-    Scanner scan = new Scanner(System.in);
-    Pattern pattern;
-    Matcher matcher;
+    ArrayList<WordPattern> patterns = new ArrayList<>();
 
-    ArrayList<WordPattern> patterns;
-
-    public WordProcessor() {
+    /**
+     * constructs a new WordProcessor.
+     * reads "flags" from `TextFiles/flags.txt`
+     * and reads responses from `TextFiles/response.txt`.
+     * they should be paired up
+     * 
+     * @see WordPattern
+     */
+    public WordProcessor() throws FileNotFoundException {
         File flagFile = new File("TextFiles/flags.txt");
         Scanner flagReader = new Scanner(flagFile);
-        File responseFile = new File("TextFiles/response.txt");
-        Scanner responseReader = new Scanner(responseReader);
+        File responseFile = new File("TextFiles/responses.txt");
+        Scanner responseReader = new Scanner(responseFile);
 
-        ArrayList<String> flags;
-        ArrayList<String> responses;
+        ArrayList<String> flags = new ArrayList<>();
+        ArrayList<String> responses = new ArrayList<>();
 
         // read flag reader into an array
         while (flagReader.hasNext()) {
@@ -35,45 +43,27 @@ public class WordProcessor {
             System.exit(1);
         }
 
-        for (i=0; i < flags.size(); i++) {
+        for (int i=0; i < flags.size(); i++) {
+            System.out.printf("%s => %s\n", flags.get(i), responses.get(i));
             patterns.add(new WordPattern(flags.get(i), responses.get(i)));
         }
     }
 
     /**
-     * This is the method for the chatbot to identify keywords that abide by regex Identifiers in the text file
-     * @return flags: List of flags to refer to in responses text file
+     * tries to get the response of the first matching pattern in the
+     * patterns list.
+     * 
+     * @param sentence the sentence to match on
+     * @return formatted response, or null if didn't match any
      */
-    @SuppressWarnings("static-access")
-    public List<Integer> processInput() {
-        String value = scan.nextLine();
-        List<Integer> flags = new ArrayList<Integer>();
-        boolean valid;
-        int counter = 0;
-    
-        pattern.compile(value, Pattern.CASE_INSENSITIVE);
-
-        try {
-        File file = new File("TextFiles/flags.txt");
-        Scanner flagReader = new Scanner(file);
-        String line; 
-        while(flagReader.hasNext()) {
-            line = flagReader.next();
-            pattern.matcher(line);
-            valid = matcher.find();
-            counter++;
-            if(valid) {
-                flags.add(counter);
+    public String tryRecognizeAll(String sentence) {
+        for (WordPattern pattern : this.patterns) {
+            String patResponse = pattern.recognize(sentence);
+            if (patResponse != null) {
+                return patResponse;
             }
         }
 
-        flagReader.close();
-
-        } catch (Exception e) {
-            System.out.println("Error: "+ e);
-        }
-
-        return flags;
+        return null;
     }
-
 }

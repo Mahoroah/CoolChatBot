@@ -9,3 +9,7 @@ SKIBIDI
 sigma
 I hate
 APCSA
+like (\w+)
+name is (\w+( \w)?)
+work
+camera

@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 
  /*
    1) It should take input from the user...some how.
@@ -12,8 +13,19 @@
 */
 
 public class Main {
-   
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+      CommandLineOutput io = new CommandLineOutput();
+      WordProcessor processor = new WordProcessor();
 
+      while (true) {
+        String input = io.takeInput();
+        String output = processor.tryRecognizeAll(input);
+
+        if (output == null) {
+          io.putOutput("erm what the sigma");
+        } else {
+          io.putOutput(output);
+        }
+      }
     }
 }
