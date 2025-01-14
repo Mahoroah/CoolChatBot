@@ -1,4 +1,5 @@
 toilet
 like (\w+)
 name is (\w+( \w)?)
-bad
+work
+camera
