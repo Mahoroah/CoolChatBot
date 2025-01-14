@@ -4,18 +4,18 @@
 \bhi\b
 \bhello\b
 \bhey\b
-\bbye\b 
+\bbye\b
 \bskibidi\b
 \bsigma\b
 \bname is (\w+( \w+)?)
 \bwork\b
 \bcamera\b
-bad
-among 
-hi
-hello
-store
+\bbad\b
+\bamong\b
+\bhi\b
+\bhello\b
+\bstore\b
 how are
 app is (\w+)
-book
-school
+\bbook\b
+\bschool\b
