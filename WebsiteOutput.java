@@ -12,6 +12,11 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+/**
+ * this class starts an http server in a new thread,
+ * and when asked for input, will block until input is recieved
+ * from the web server.
+ */
 public class WebsiteOutput implements OutputInterface {
     private HttpServer server;
     private static final String html;
@@ -26,6 +31,11 @@ public class WebsiteOutput implements OutputInterface {
       }
     }
 
+    /**
+     * creates a new web server, bound to localhost:8000.
+     * the route "/main" returns the main html page.
+     * the route "/respond" responds with the chatbot output.
+     */
     public WebsiteOutput() throws IOException {
         this.server = HttpServer.create(new InetSocketAddress(8000), 0);
         this.server.createContext("/main", new MainHandler());
@@ -81,5 +91,4 @@ public class WebsiteOutput implements OutputInterface {
             os.close();
         }
     }
-
 }

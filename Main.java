@@ -15,9 +15,11 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) {
       try {
-        // CommandLineOutput io = new CommandLineOutput();
         OutputInterface io = new WebsiteOutput();
         WordProcessor processor = new WordProcessor();
+
+        System.out.println();
+        System.out.println("open up localhost:8000/main in your browser");
 
         while (true) {
           String input = io.takeInput();
