@@ -1,2 +1,90 @@
+<!doctype html>
+
 <head>
+  <script>
+    let userinput;
+    
+    function addBubble(sender, text) {
+      let container = document.getElementById("bubble-container");
+      let newBubble = document.createElement("div");
+      newBubble.className = `bubble ${sender}`;
+      newBubble.innerText = text;
+      container.insertBefore(newBubble, userinput);
+      container.scrollTo(0, container.scrollHeight);
+    }
+
+    window.onload = () => {
+      userinput = document.getElementById("userinput");
+      userinput.onkeydown = e => {
+        if (e.key == "Enter") {
+          addBubble("human", userinput.value);
+          fetch("/respond", {
+            method: "POST",
+            body: userinput.value,
+          })
+          .then(r => r.text())
+          .then(t => addBubble("bot", t));
+          userinput.value = "";
+        }
+      };
+    };
+  </script>
+
+  <style>
+    html {
+      background-color: darkslategray;
+      color: lightgray;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      grid-area: a;
+      color: mediumaquamarine;
+      text-align: center;
+      font-size: 40pt;
+    }
+
+    #bubble-container {
+      filter: drop-shadow(0 0 10px black);
+      width: 80%;
+      padding: 10px;
+      display: flex;
+      margin: 0;
+      margin-left: 10%;
+
+      height: 70vh;
+      overflow: scroll;
+
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .bubble {
+      font-size: 29pt;
+      width: fit-content;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .human {
+      align-self: end;
+      background-color: green;
+    }
+
+    .bot {
+      align-self: start;
+      background-color: gray;
+    }
+
+    #userinput {
+      align-self: center;
+    }
+  </style>
 </head>
+
+<html>
+  <h1>cool chat bot web interface</h1>
+  <div id="bubble-container">
+   <input type="text" class="bubble" id="userinput">
+  </div>
+</html>
