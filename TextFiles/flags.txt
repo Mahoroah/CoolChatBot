@@ -1,8 +1,15 @@
-toilet
-like (\w+)
-name is (\w+( \w)?)
-work
-camera
+\btoilet\b
+\blike\b $(\w+)
+\brizz\b
+\bhi\b
+\bhello\b
+\bhey\b
+\bbye\b 
+\bskibidi\b
+\bsigma\b
+\bname is (\w+( \w+)?)
+\bwork\b
+\bcamera\b
 bad
 among 
 hi

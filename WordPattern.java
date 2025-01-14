@@ -12,7 +12,7 @@ public class WordPattern {
    * @param response the response string template. $N means the Nth capturing group will be substituted there.
    */
   public WordPattern(String pattern, String response) {
-    this.pattern = Pattern.compile(pattern);
+    this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
     this.response = response;
   }
 

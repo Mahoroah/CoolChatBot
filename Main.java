@@ -13,19 +13,27 @@ import java.io.FileNotFoundException;
 */
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-      CommandLineOutput io = new CommandLineOutput();
-      WordProcessor processor = new WordProcessor();
+    public static void main(String[] args) {
+      try {
+        OutputInterface io = new WebsiteOutput();
+        WordProcessor processor = new WordProcessor();
 
-      while (true) {
-        String input = io.takeInput();
-        String output = processor.tryRecognizeAll(input);
+        System.out.println();
+        System.out.println("open up localhost:8000/main in your browser");
 
-        if (output == null) {
-          io.putOutput("erm what the sigma");
-        } else {
-          io.putOutput(output);
+        while (true) {
+          String input = io.takeInput();
+          String output = processor.tryRecognizeAll(input);
+
+          if (output == null) {
+            io.putOutput("erm what the sigma");
+          } else {
+            io.putOutput(output);
+          }
         }
+      } catch (Exception e) {
+        System.err.println(e);
+        System.exit(1);
       }
     }
 }
