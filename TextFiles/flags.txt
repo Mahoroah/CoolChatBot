@@ -3,3 +3,12 @@ like (\w+)
 name is (\w+( \w)?)
 work
 camera
+bad
+among 
+hi
+hello
+store
+how are
+app is (\w+)
+book
+school

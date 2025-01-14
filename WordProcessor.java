@@ -1,9 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.regex.*;
 
 
 
@@ -57,6 +55,7 @@ public class WordProcessor {
      * @return formatted response, or null if didn't match any
      */
     public String tryRecognizeAll(String sentence) {
+        sentence = sentence.toLowerCase();
         for (WordPattern pattern : this.patterns) {
             String patResponse = pattern.recognize(sentence);
             if (patResponse != null) {
