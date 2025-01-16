@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
  /*
    1) It should take input from the user...some how.
@@ -15,11 +16,24 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) {
       try {
-        OutputInterface io = new WebsiteOutput();
-        WordProcessor processor = new WordProcessor();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("do you want the web interface or the console interface (W/C)? ");
+        String answer = scanner.nextLine();
+        char a = answer.toLowerCase().charAt(0);
+        OutputInterface io;
 
-        System.out.println();
-        System.out.println("open up localhost:8000/main in your browser");
+        if (a == 'w') {
+          io = new WebsiteOutput();
+          System.out.println("open up localhost:8000/main in your browser");
+        } else if (a == 'c') {
+          io = new CommandLineOutput();
+        } else {
+          System.err.println("what da heck is " + a);
+          io = null;
+          System.exit(1);
+        }
+
+        WordProcessor processor = new WordProcessor();
 
         while (true) {
           String input = io.takeInput();

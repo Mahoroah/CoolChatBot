@@ -42,7 +42,7 @@ public class WordProcessor {
         }
 
         for (int i=0; i < flags.size(); i++) {
-            System.out.printf("%s => %s\n", flags.get(i), responses.get(i));
+            // System.out.printf("%s => %s\n", flags.get(i), responses.get(i));
             patterns.add(new WordPattern(flags.get(i), responses.get(i)));
         }
     }
