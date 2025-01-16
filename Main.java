@@ -24,7 +24,7 @@ public class Main {
 
         if (a == 'w') {
           io = new WebsiteOutput();
-          System.out.println("open up localhost:8000/main in your browser");
+          System.out.println("open up localhost:8080/main in your browser");
         } else if (a == 'c') {
           io = new CommandLineOutput();
         } else {

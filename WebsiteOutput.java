@@ -37,7 +37,7 @@ public class WebsiteOutput implements OutputInterface {
      * the route "/respond" responds with the chatbot output.
      */
     public WebsiteOutput() throws IOException {
-        this.server = HttpServer.create(new InetSocketAddress(8000), 0);
+        this.server = HttpServer.create(new InetSocketAddress(8080), 0);
         this.server.createContext("/main", new MainHandler());
         this.server.createContext("/respond", new ResponseHandler());
         this.server.setExecutor(null); // creates a default executor
